@@ -24,8 +24,8 @@
 
     <!-- Gzosp Logo Header -->
     <Preference
-        android:key="gz_logo"
-        android:layout="@layout/gzosp_logo" />
+        android:key="validus_logo"
+        android:layout="@layout/validus_logo" />
 
     <!-- Android version -->
     <Preference

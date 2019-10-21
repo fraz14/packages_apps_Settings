@@ -19,8 +19,11 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:adjustViewBounds="false"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_gzosp" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="36dp"
+        android:layout_marginRight="36dp"
+        android:paddingBottom="16dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_validus" />
 </LinearLayout> 
