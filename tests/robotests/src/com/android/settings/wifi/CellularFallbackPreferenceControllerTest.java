@@ -18,54 +18,36 @@ package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.telephony.SubscriptionManager;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class CellularFallbackPreferenceControllerTest {
     private static final String KEY_CELLULAR_FALLBACK = "wifi_cellular_data_fallback";
+
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private Context mContext;
 
     private CellularFallbackPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-
-        mController = spy(new CellularFallbackPreferenceController(RuntimeEnvironment.application,
-                KEY_CELLULAR_FALLBACK));
-    }
-
-    @Test
-    public void isAvailable_invalidActiveSubscriptionId_shouldReturnFalse() {
-        doReturn(SubscriptionManager.INVALID_SUBSCRIPTION_ID)
-                .when(mController).getActiveDataSubscriptionId();
-
-        assertThat(mController.isAvailable()).isFalse();
+        mController = new CellularFallbackPreferenceController(mContext, KEY_CELLULAR_FALLBACK);
     }
 
     @Test
     public void isAvailable_avoidBadWifiConfigIsFalse_shouldReturnTrue() {
-        final Resources resources = mock(Resources.class);
-
-        doReturn(SubscriptionManager.DEFAULT_SUBSCRIPTION_ID)
-                .when(mController).getActiveDataSubscriptionId();
-        doReturn(resources).when(mController).getResourcesForSubId(anyInt());
-        when(resources.getInteger(
+        when(mContext.getResources().getInteger(
                 com.android.internal.R.integer.config_networkAvoidBadWifi))
                 .thenReturn(0);
 
@@ -74,12 +56,7 @@ public class CellularFallbackPreferenceControllerTest {
 
     @Test
     public void isAvailable_avoidBadWifiConfigIsTrue_shouldReturnFalse() {
-        final Resources resources = mock(Resources.class);
-
-        doReturn(SubscriptionManager.DEFAULT_SUBSCRIPTION_ID)
-                .when(mController).getActiveDataSubscriptionId();
-        doReturn(resources).when(mController).getResourcesForSubId(anyInt());
-        when(resources.getInteger(
+        when(mContext.getResources().getInteger(
                 com.android.internal.R.integer.config_networkAvoidBadWifi))
                 .thenReturn(1);
 
