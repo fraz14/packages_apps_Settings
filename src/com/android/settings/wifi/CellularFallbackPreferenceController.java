@@ -17,11 +17,8 @@
 package com.android.settings.wifi;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.provider.Settings;
-import android.telephony.SubscriptionManager;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.core.TogglePreferenceController;
 
 /**
@@ -36,7 +33,7 @@ public class CellularFallbackPreferenceController extends TogglePreferenceContro
 
     @Override
     public int getAvailabilityStatus() {
-        return avoidBadWifiConfig() ? UNSUPPORTED_ON_DEVICE : AVAILABLE;
+        return !avoidBadWifiConfig() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -52,24 +49,8 @@ public class CellularFallbackPreferenceController extends TogglePreferenceContro
     }
 
     private boolean avoidBadWifiConfig() {
-        final int activeDataSubscriptionId = getActiveDataSubscriptionId();
-        if (activeDataSubscriptionId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            return true;
-        }
-
-        final Resources resources = getResourcesForSubId(activeDataSubscriptionId);
-        return resources.getInteger(com.android.internal.R.integer.config_networkAvoidBadWifi) == 1;
-    }
-
-    @VisibleForTesting
-    int getActiveDataSubscriptionId() {
-        return SubscriptionManager.getActiveDataSubscriptionId();
-    }
-
-    @VisibleForTesting
-    Resources getResourcesForSubId(int subscriptionId) {
-        return SubscriptionManager.getResourcesForSubId(mContext, subscriptionId,
-                false /* useRootLocale */);
+        return mContext.getResources().getInteger(
+                com.android.internal.R.integer.config_networkAvoidBadWifi) == 1;
     }
 
     private boolean avoidBadWifiCurrentSettings() {
