@@ -58,4 +58,21 @@
     <string name="accent_color">Accent picker</string>
     <string name="accent_summary">System wide accent maker</string>
 
+    <!-- Accent presets -->
+    <string name="default_string">Default</string>
+    <string name="custom_string">Custom</string>
+    <string name="accent_preset_0">AOSP Cinnamon</string>
+    <string name="accent_preset_1">AOSP Green</string>
+    <string name="accent_preset_2">AOSP Ocean</string>
+    <string name="accent_preset_3">AOSP Orchid</string>
+    <string name="accent_preset_4">AOSP Purple</string>
+    <string name="accent_preset_5">AOSP Space</string>
+    <string name="accent_preset_6">Blue Grey</string>
+    <string name="accent_preset_7">Cinnamon Dark</string>
+    <string name="accent_preset_8">Clowns Nose</string>
+    <string name="accent_preset_9">Mint</string>
+    <string name="accent_preset_10">Nexus Green</string>
+    <string name="accent_preset_11">Yellow</string>
+    <string name="accent_preset_title">Accent preset</string>
+
 </resources>
