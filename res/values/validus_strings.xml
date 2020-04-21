@@ -51,5 +51,9 @@
     <string name="selinux_status_disabled">Disabled</string>
     <string name="selinux_status_permissive">Permissive</string>
     <string name="selinux_status_enforcing">Enforcing</string>
+        
+    <!-- About phone screen, Validus device maintainer name -->
+    <string name="device_maintainer">Device maintainer</string>
+    <string name="device_maintainers">Device maintainers</string>
 
 </resources>
